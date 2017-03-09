@@ -200,7 +200,7 @@ Make sure to ```cd flask-app``` before you start creating the files, because you
 
 You will also need a text editor. We recommend vim, which will already be installed in the terminal. However if you wanted, for example, emacs, you would install it using the Alpine package manager:
 ```.term1
-apk add emacs
+apk add --update emacs
 ```
 
 #### app.py
