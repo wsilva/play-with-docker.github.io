@@ -47,15 +47,11 @@
     //Register captcha only on the first term to avoid showing multiple times
     var term = window.pwd.terms[0];
     var els = document.querySelectorAll(term.selector);
-    if (els.length==0) {
-      document.getElementById('left-panel').style.width="100%";
-    }
-      for (var n=0; n < els.length; ++n) {
-        var captcha = document.createElement('div');
-        captcha.className = 'captcha';
-        els[n].appendChild(captcha);
-        window.grecaptcha.render(captcha, {'sitekey': '6Ld8pREUAAAAAOkrGItiEeczO9Tfi99sIHoMvFA_', 'callback': verifyCallback.bind(window.pwd)});
-      
+    for (var n=0; n < els.length; ++n) {
+      var captcha = document.createElement('div');
+      captcha.className = 'captcha';
+      els[n].appendChild(captcha);
+      window.grecaptcha.render(captcha, {'sitekey': '6Ld8pREUAAAAAOkrGItiEeczO9Tfi99sIHoMvFA_', 'callback': verifyCallback.bind(window.pwd)});
     }
   };
 
