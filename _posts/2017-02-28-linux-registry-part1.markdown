@@ -64,7 +64,7 @@ First we'll test that the registry image is working correctly, by running it wit
 docker run -d -p 5000:5000 --name registry registry:2
 ```
 ## Understanding Image Names
-Typically we work with images from the Docker Hub, which is the default registry for the Docker Engine. Commands using just the image repository name work fine, like this:
+Typically we work with images from Docker Store, which is the default registry for Docker. Commands using just the image repository name work fine, like this:
 ```.term1
 docker pull hello-world
 ```
@@ -74,7 +74,7 @@ docker pull hello-world
 - `hello-world` - the repository name, in this case in `{imageName}` format;
 - `latest` - the image tag.
 
-If a tag isn't specified, then the default `latest` is used. If a registry hostname isn't specified then the default `docker.io` for Docker Hub is used. If you want to use images with any other registry, you need to explicitly specify the hostname - the default is always Docker Hub, you can't change to a different default registry.
+If a tag isn't specified, then the default `latest` is used. If a registry hostname isn't specified then the default `docker.io` for Docker Store is used. If you want to use images with any other registry, you need to explicitly specify the hostname - the default is always Docker Store.
 
 With a local registry, the hostname and the custom port used by the registry is the full registry address, e.g. `127.0.0.1:5000`. In this sample we'll just be using `127.0.0.1:5000` as that's already been added to the daemon.
 
@@ -82,7 +82,7 @@ With a local registry, the hostname and the custom port used by the registry is 
 
 Docker uses the hostname from the full image name to determine which registry to use. We can build images and include the local registry hostname in the image tag, or use the `docker tag` command to add a new tag to an existing image.
 
-These commands pull a public image from Docker Hub, tag it for use in the private registry with the full name `127.0.0.1:5000/hello-world`, and then push it to the registry:
+These commands pull a public image from Docker Store, tag it for use in the private registry with the full name `127.0.0.1:5000/hello-world`, and then push it to the registry:
 
 ```.term1
 docker tag hello-world 127.0.0.1:5000/hello-world
