@@ -19,6 +19,20 @@
   }
 }
 
+small .post-tag {
+  background: #eee;
+  color: #000;
+  &:before {
+    content: none;
+  }
+  &:hover {
+    text-decoration: none;
+    background: #000;
+    color: #fff;
+    cursor: default;
+  }
+}
+
 .tags-expo {
   :target:before {
     content:"";
