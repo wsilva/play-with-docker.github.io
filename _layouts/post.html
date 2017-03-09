@@ -5,7 +5,11 @@ layout: default
 {% assign terms = page.terms | default: 1 %}
 <div class="panel-container">
 
-    <div class="panel-left" id="left-panel">
+    {% if terms > 0 %}
+    <div class="panel-left content">
+    {% else %}
+    <div class="content">
+    {% endif %}
         <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
             <header class="post-header">
@@ -33,10 +37,17 @@ layout: default
 
     </div>
 
+    {% if terms > 0 %}
     <div class="splitter">
     </div>
 
-    <div class="panel-right" id="right-panel">{% for i in (1..terms) %}<div class="term{{i}}" style="height: {{ 100 | divided_by: terms }}%;"></div>{% endfor %}</div>
+    <div class="panel-right">
+        {% for i in (1..terms) %}
+        <div class="term{{i}}" style="height: {{ 100 | divided_by: terms }}%;"></div>
+        {% endfor %}
+    </div>
+    {% endif  %}
+
 </div>
 
 <script>
