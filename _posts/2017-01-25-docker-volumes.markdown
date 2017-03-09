@@ -105,7 +105,7 @@ docker image build -t img1 .
 We will then create a container in interactive mode (using -ti flags) from this image and name it c2.
 
 ```.term1
-docker container run --name c2 -ti img
+docker container run --name c2 -ti img1
 ```
 
 We should then end up in a shell within the container. From there, we will go into /data and create a hello.txt file.
