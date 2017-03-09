@@ -4,7 +4,7 @@ title:  "Security Lab: Capabilities"
 date:   2017-03-06
 author: "@manomarks"
 tags: [linux,operations]
-categories: intermediate
+categories: advanced
 ---
 
 # Lab: Capabilities
@@ -21,12 +21,6 @@ You will complete the following steps as part of this lab.
 - [Step 2 - Working with Docker and capabilities](#docker_cap)
 - [Step 3 - Testing Docker capabilities](#test_docker)
 - [Step 4 - Extra for experts](#extra)
-
-# Prerequisites
-
-You will need all of the following to complete this lab:
-
-- A Linux-based Docker Host running Docker 1.12 or higher
 
 # <a name="cap_intro"></a>Step 1: Introduction to capabilities
 
@@ -65,23 +59,23 @@ Option 2 as the most realistic as of Docker 1.12. Option 3 would be ideal but no
 
 > **Note:** Another option may be added in future versions of Docker that will allow you to run containers as a non-root user with added capabilities. The correct way of doing this requires *ambient capabilities* which was added to the Linux kernel in version 4.3. Whether it is possible for Docker to approximate this behavior in older kernels requires more research.
 
-In the following commands, `$CAP` will be used to indicate one or more individual capabilities.
+In the following commands, `$CAP` will be used to indicate one or more individual capabilities. We'll test these out in the next section.
 
 1. To drop capabilities from the `root` account of a container.
 
-   ```.term1
+   ```
    docker run --rm -it --cap-drop $CAP alpine sh
    ```
 
 2. To add capabilities to the `root` account of a container.
 
-   ```.term1
+   ```
    docker run --rm -it --cap-add $CAP alpine sh
    ```
 
 3. To drop all capabilities and then explicitly add individual capabilities to the `root` account of a container.
 
-   ```.term1
+   ```
    docker run --rm -it --cap-drop ALL --cap-add $CAP alpine sh
    ```
 
@@ -113,8 +107,11 @@ In this step you will start various new containers. Each time you will use the c
 
    ```.term1
     docker run --rm -it --cap-drop CHOWN alpine chown nobody /
-   chown: /: Operation not permitted
    ```
+   ```
+    chown: /: Operation not permitted
+   ```
+
 
    This time the command returns an error code indicating it failed. This is because the container's root account does not have the `CHOWN` capability and therefore cannot change the ownership of a file or directory.
 
@@ -122,6 +119,8 @@ In this step you will start various new containers. Each time you will use the c
 
    ```.term1
     docker run --rm -it --cap-add chown -u nobody alpine chown nobody /
+  ```
+  ```
    chown: /: Operation not permitted
    ```
 
@@ -189,9 +188,15 @@ For information on what these mean, see the [capabilities manpage](http://man7.o
 The `capsh` command can be useful for experimenting with capabilities. `capsh --help` shows how to use the command:
 
 ```.term1
-capsh --help
+docker run --rm -it alpine sh -c 'apk add -U libcap;capsh --help'
 ```
 ```
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.5/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.5/community/x86_64/APKINDEX.ta
+r.gz
+(1/1) Installing libcap (2.25-r1)
+Executing busybox-1.25.1-r0.trigger
+OK: 4 MiB in 12 packages
 usage: capsh [args ...]
   --help         this message (or try 'man capsh')
   --print        display capability relevant state
@@ -225,7 +230,7 @@ Libcap and libcap-ng can both be used to modify capabilities.
 
    The command below shows how to set the CAP_NET_RAW capability as *effective* and *permitted* on the file represented by `$file`. The `setcap` command calls on libcap to do this.
 
-   ```.term1
+   ```
    setcap cap_net_raw=ep $file
    ```
 
@@ -233,7 +238,7 @@ Libcap and libcap-ng can both be used to modify capabilities.
 
    The `filecap` command calls on libcap-ng.
 
-   ```.term1
+   ```
    filecap /absolute/path net_raw
    ```
 
@@ -245,7 +250,7 @@ There are multiple ways to read out the capabilities from a file.
 
 1. Using libcap:
 
-   ```.term1
+   ```
    getcap $file
 
    $file = cap_net_raw+ep
@@ -253,7 +258,7 @@ There are multiple ways to read out the capabilities from a file.
 
 2. Using libcap-ng:
 
-   ```.term1
+   ```
    $ filecap /absolue/path/to/file
    ```
    ```
@@ -263,7 +268,7 @@ There are multiple ways to read out the capabilities from a file.
 
 3. Using extended attributes (attr package):
 
-   ```.term1
+   ```
    getfattr -n security.capability $file
    ```
    ```
@@ -277,7 +282,7 @@ Docker images cannot have files with capability bits set. This reduces the risk 
 
 1. You can audit directories for capability bits with the following commands:
 
-```.term1
+```
 # with libcap
 getcap -r /
 
@@ -287,7 +292,7 @@ filecap -a
 
 2. To remove capability bits you can use.
 
-```.term1
+```
 # with libcap
 setcap -r $file
 
