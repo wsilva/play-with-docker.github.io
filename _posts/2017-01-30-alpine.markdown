@@ -14,7 +14,7 @@ To get started, let's run the following in our terminal:
 docker image pull alpine
 ```
 
-The `pull` command fetches the alpine **image** from the **Docker registry** and saves it in our system. In this case the registry is **[Docker Cloud](https://cloud.docker.com)**. You can change the registry, but that's a different lab.
+The `pull` command fetches the alpine **image** from the **Docker registry** and saves it in our system. In this case the registry is **[Docker Store](https://store.docker.com)**. You can change the registry, but that's a different lab.
 
 You can use the `docker image` command to see a list of all images on your system.
 

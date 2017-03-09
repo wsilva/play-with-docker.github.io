@@ -11,9 +11,9 @@ Great! So you have now looked at `docker run`, played with a Docker container an
 ### 2.1 Run a static website in a container
 >**Note:** Code for this section is in this repo in the [static-site directory](https://github.com/docker/labs/tree/master/beginner/static-site).
 
-Let's start by taking baby-steps. First, we'll use Docker to run a static website in a container. The website is based on an existing image. We'll pull a Docker image from Docker Cloud, run the container, and see how easy it is to set up a web server.
+Let's start by taking baby-steps. First, we'll use Docker to run a static website in a container. The website is based on an existing image. We'll pull a Docker image from Docker Store, run the container, and see how easy it is to set up a web server.
 
-The image that you are going to use is a single-page website that was already created for this demo and is available on the Docker Cloud as [`seqvence/static-site`](https://hub.docker.com/r/seqvence/static-site/). You can download and run the image directly in one go using `docker run` as follows.
+The image that you are going to use is a single-page website that was already created for this demo and is available on the Docker Store as `seqvence/static-site`. You can download and run the image directly in one go using `docker run` as follows.
 
 ```.term1
 docker container run -d seqvence/static-site
@@ -156,7 +156,7 @@ So for example, the `docker image pull` command given below will pull an image n
 docker image pull ubuntu
 ```
 
-To get a new Docker image you can either get it from a registry (such as the Docker Cloud) or create your own. There are hundreds of thousands of images available on [Docker Cloud](https://cloud.docker.com). You can also search for images directly from the command line using `docker search`.
+To get a new Docker image you can either get it from a registry (such as the Docker Cloud) or create your own. There are hundreds of thousands of images available on [Docker Store](https://Store.docker.com). You can also search for images directly from the command line using `docker search`.
 
 An important distinction with regard to images is between _base images_ and _child images_.
 

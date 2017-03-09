@@ -68,4 +68,4 @@ Login with `docker login` and then push the image:
 docker push <docker-id>/windows-test-image
 ```
 
-Images stored on Docker Cloud are available in the web interface and public images can be pulled by other Docker users.
+Images stored on Docker Cloud are available in the web interface and public images can be pulled by other Docker users in the [Docker Store](https://store.docker.com).
