@@ -28,6 +28,7 @@ We've created a simple application which includes an error. You can see the app 
 - docker-compose.yml
 
 `app.js` defines a simple node app. It serves up `index.html`, refreshing every 2 seconds with quote from an array. Here's what it looks like:
+
 ![Image of Browser with quotations from app](../images/browser-broken.gif "Image of a green background with quotes cycling through. Last image is just two quotation marks")
 
 Let's take a look at the `Dockerfile`:
@@ -154,6 +155,7 @@ The reason becomes clear if you open up the “Closure” section under “VARIA
 
 ### Fix the bug
 Replace the `> ` with `>=` in the conditional on the next line:
+
 ![Image of VS Code line 24 to fix](../images/fixing-line.png "Image of Visual Studio Code line 24 to fix")
 
 Now save the file. A second or two later, you should see the debugger detach and then reattach (the yellow line highlighting the breakpoint will disappear and reappear). This is because several things have just happened:

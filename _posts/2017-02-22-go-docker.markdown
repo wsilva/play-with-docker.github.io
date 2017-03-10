@@ -74,7 +74,7 @@ One solution is to *commit* the container that we just built,
 i.e. "freeze" it into a new image:
 
 ```.term1
-docker container commit $(docker ps -lq) awesomeness
+docker container commit $(docker container ls -lq) awesomeness
 ```
 
 Note: `docker container ls -lq` outputs the ID (and only the ID!) of
