@@ -20,6 +20,7 @@
   var verifyCallback = function(response) {
     var self = this;
     var data = encodeURIComponent('g-recaptcha-response') + '=' + encodeURIComponent(response);
+    data += '&' + encodeURIComponent('session-duration') + '=' + encodeURIComponent('90m');
     sendRequest('POST', this.opts.baseUrl + '/', {headers:{'Content-type':'application/x-www-form-urlencoded'}}, data, function(resp) {
       //TODO handle errors
       if (resp.status == 200) {
