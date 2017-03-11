@@ -268,7 +268,9 @@ Create a directory called `templates` and create an **index.html** file in that 
   <body>
     <div class="container">
       <h4>Cat Gif of the day</h4>
+      {% raw %}
       <img src="{{url}}" />
+      {% endraw %}
       <p><small>Courtesy: <a href="http://www.buzzfeed.com/copyranter/the-best-cat-gif-post-in-the-history-of-cat-gifs">Buzzfeed</a></small></p>
     </div>
   </body>
@@ -285,7 +287,7 @@ A [Dockerfile](https://docs.docker.com/engine/reference/builder/) is a text file
   We'll start by specifying our base image, using the `FROM` keyword:
 
   ```
-  FROM alpine:latest
+  FROM alpine:edge
   ```
 
 2. The next step usually is to write the commands of copying the files and installing the dependencies. But first we will install the Python pip package to the alpine linux distribution. This will not just install the pip package but any other dependencies too, which includes the python interpreter. Add the following [RUN](https://docs.docker.com/engine/reference/builder/#run) command next:
@@ -328,7 +330,7 @@ A [Dockerfile](https://docs.docker.com/engine/reference/builder/) is a text file
 
   ```
   # our base image
-  FROM alpine:latest
+  FROM alpine:edge
 
   # Install python and pip
   RUN apk add --update py2-pip
