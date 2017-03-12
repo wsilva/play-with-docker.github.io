@@ -197,7 +197,7 @@ Start by creating a directory called ```flask-app``` where we'll create the foll
 - [app.py](#apppy)
 - [requirements.txt](#requirementstxt)
 - [templates/index.html](#templatesindexhtml)
-- [Dockerfile](#dockerfile)
+- [Dockerfile](#232-write-a-dockerfile)
 
 Make sure to ```cd flask-app``` before you start creating the files, because you don't want to start adding a whole bunch of other random files to your image.
 
@@ -287,71 +287,73 @@ A [Dockerfile](https://docs.docker.com/engine/reference/builder/) is a text file
 
 1. Create a file called **Dockerfile**, and add content to it as described below.
 
-  We'll start by specifying our base image, using the `FROM` keyword:
+    We'll start by specifying our base image, using the `FROM` keyword:
 
-  ```
-  FROM alpine:edge
-  ```
+    ```
+    FROM alpine:edge
+    ```
 
 2. The next step usually is to write the commands of copying the files and installing the dependencies. But first we will install the Python pip package to the alpine linux distribution. This will not just install the pip package but any other dependencies too, which includes the python interpreter. Add the following [RUN](https://docs.docker.com/engine/reference/builder/#run) command next:
-  ```
-  RUN apk add --update py2-pip
-  ```
+  
+    ```
+    RUN apk add --update py2-pip
+    ```
 
 3. Let's add the files that make up the Flask Application.
 
-  Install all Python requirements for our app to run. This will be accomplished by adding the lines:
+    Install all Python requirements for our app to run. This will be accomplished by adding the lines:
 
-  ```
-  COPY requirements.txt /usr/src/app/
-  RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
-  ```
+    ```
+    COPY requirements.txt /usr/src/app/
+    RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
+    ```
 
-  Copy the files you have created earlier into our image by using [COPY](https://docs.docker.com/engine/reference/builder/#copy)  command.
+    Copy the files you have created earlier into our image by using [COPY](https://docs.docker.com/engine/reference/builder/#copy)  command.
 
-  ```
-  COPY app.py /usr/src/app/
-  COPY templates/index.html /usr/src/app/templates/
-  ```
+    ```
+    COPY app.py /usr/src/app/
+    COPY templates/index.html /usr/src/app/templates/
+    ```
 
 4. Specify the port number which needs to be exposed. Since our flask app is running on `5000` that's what we'll expose.
-  ```
-  EXPOSE 5000
-  ```
+  
+    ```
+    EXPOSE 5000
+    ```
 
 5. The last step is the command for running the application which is simply - `python ./app.py`. Use the [CMD](https://docs.docker.com/engine/reference/builder/#cmd) command to do that:
 
-  ```
-  CMD ["python", "/usr/src/app/app.py"]
-  ```
+    ```
+    CMD ["python", "/usr/src/app/app.py"]
+    ```
 
-  The primary purpose of `CMD` is to tell the container which command it should run by default when it is started.
+    The primary purpose of `CMD` is to tell the container which command it should run by default when it is started.
 
 6. Verify your Dockerfile.
 
-  Our `Dockerfile` is now ready. This is how it looks:
+    Our `Dockerfile` is now ready. This is how it looks:
 
-  ```
-  # our base image
-  FROM alpine:edge
+    ```
+    # our base image
+    FROM alpine:edge
 
-  # Install python and pip
-  RUN apk add --update py2-pip
+    # Install python and pip
+    RUN apk add --update py2-pip
 
-  # install Python modules needed by the Python app
-  COPY requirements.txt /usr/src/app/
-  RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
+    # install Python modules needed by the Python app
+    COPY requirements.txt /usr/src/app/
+    RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
 
-  # copy files required for the app to run
-  COPY app.py /usr/src/app/
-  COPY templates/index.html /usr/src/app/templates/
+    # copy files required for the app to run
+    COPY app.py /usr/src/app/
+    COPY templates/index.html /usr/src/app/templates/
 
-  # tell the port number the container should expose
-  EXPOSE 5000
+    # tell the port number the container should expose
+    EXPOSE 5000
 
-  # run the application
-  CMD ["python", "/usr/src/app/app.py"]
-  ```
+    # run the application
+    CMD ["python", "/usr/src/app/app.py"]
+    ```
 
 ### 2.3.3 Build the image
 
@@ -448,8 +450,8 @@ OK, now that you are done with this container, stop and remove it since you won'
 Open another terminal window and execute the following commands:
 
 ```.term1
-$ docker container stop myfirstapp
-$ docker container rm myfirstapp
+docker container stop myfirstapp
+docker container rm myfirstapp
 ```
 
 or
