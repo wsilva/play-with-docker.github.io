@@ -231,7 +231,7 @@ If you are on Linux, you can even install directly to your system
 
 ```.term1
 docker container run -v /usr/local/bin:/go/bin \
-  golang get github.com/golang/example/hello/...
+  golang go get github.com/golang/example/hello/...
 ```
 
 However, on a Mac, trying to use `/usr` as a volume will not
