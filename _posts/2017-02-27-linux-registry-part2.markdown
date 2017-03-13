@@ -49,11 +49,14 @@ mkdir /etc/docker/certs.d
 mkdir /etc/docker/certs.d/127.0.0.1:5000 
 cp $(pwd)/certs/domain.crt /etc/docker/certs.d/127.0.0.1:5000/ca.crt
 ```
-Make sure to restart the docker daemon.
+Make sure to restart the docker daemon. 
 ```.term1
 pkill dockerd
-dockerd &
+dockerd > /dev/null 2>&1 &
 ```
+
+The */dev/null* part is to avoid the output logs from docker daemon.
+
 Now we have an SSL certificate and can run a secure registry.
 
 ## Running the Registry Securely
